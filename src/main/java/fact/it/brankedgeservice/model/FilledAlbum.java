@@ -1,20 +1,45 @@
 package fact.it.brankedgeservice.model;
 
 public class FilledAlbum {
-    private Album album;
+    private String name;
+    private String image;
+    private String genre; // CHANGE THIS FOR SERVICE GENRE
+
     private Artist artist;
 
+    private String release;
+
     public FilledAlbum(Album album, Artist artist) {
-        this.album = album;
+        setName(album.getName());
+        setGenre(album.getGenre()); // CHANGE THIS FOR SERVICE GENRE
+        setImage(album.getImage());
+        setRelease(album.getRelease());
+
         this.artist = artist;
     }
 
-    public Album getAlbum() {
-        return album;
+    public String getName() {
+        return name;
     }
 
-    public void setAlbum(Album album) {
-        this.album = album;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public Artist getArtist() {
@@ -23,5 +48,13 @@ public class FilledAlbum {
 
     public void setArtist(Artist artist) {
         this.artist = artist;
+    }
+
+    public String getRelease() {
+        return release;
+    }
+
+    public void setRelease(String release) {
+        this.release = release;
     }
 }
