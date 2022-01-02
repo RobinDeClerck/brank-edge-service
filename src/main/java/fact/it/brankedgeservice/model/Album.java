@@ -9,6 +9,9 @@ public class Album {
     private String artist;
     private String release;
 
+    public Album() {
+    }
+
     public Album(String name, String artist, String genre, String release, String image) {
         this.name = name;
         this.image = image;

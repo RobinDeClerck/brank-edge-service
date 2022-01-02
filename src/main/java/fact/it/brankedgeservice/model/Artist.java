@@ -15,6 +15,8 @@ public class Artist {
 
     private String bannerImage;
 
+    public Artist() {
+    }
 
     public Artist(String uuid, String name, String type, String originCountry, List<String> members, String bannerImage) {
         this.name = name;
