@@ -32,7 +32,7 @@ public class FilledAlbumController {
     @Value("${genreservice.baseurl}")
     private String genreServiceBaseUrl;
 
-    @GetMapping("/test")
+    @GetMapping("/test2")
     public String test() {
         return "test";
     }
@@ -40,7 +40,7 @@ public class FilledAlbumController {
     @GetMapping("/albums")
     public List<Album> getAlbums() {
         ResponseEntity<List<Album>> responseEntityAlbums =
-                restTemplate.exchange("https://" + albumServiceBaseUrl + "/albums",
+                restTemplate.exchange("http://" + albumServiceBaseUrl + "/albums",
                     HttpMethod.GET, null, new ParameterizedTypeReference<List<Album>>() {}
                 );
 
@@ -51,9 +51,9 @@ public class FilledAlbumController {
 
     @GetMapping("/albums/{name}")
     public FilledAlbum getFilledAlbumByName(@PathVariable String name) {
-        Album album = restTemplate.getForObject("https://" + albumServiceBaseUrl + "/albums/{name}", Album.class, name);
+        Album album = restTemplate.getForObject("http://" + albumServiceBaseUrl + "/albums/{name}", Album.class, name);
 
-        Artist artist = restTemplate.getForObject("https://" + artistServiceBaseUrl + "/artists/{uuid}", Artist.class, album.getArtist());
+        Artist artist = restTemplate.getForObject("http://" + artistServiceBaseUrl + "/artists/{uuid}", Artist.class, album.getArtist());
 
         return new FilledAlbum(album, artist);
     }
@@ -61,7 +61,7 @@ public class FilledAlbumController {
     @GetMapping("/genres")
     public List<Genre> getGenres() {
         ResponseEntity<List<Genre>> responseEntityGenres =
-                restTemplate.exchange("https://" + genreServiceBaseUrl + "/genres",
+                restTemplate.exchange("http://" + genreServiceBaseUrl + "/genres",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Genre>>() {}
                 );
 
@@ -72,7 +72,7 @@ public class FilledAlbumController {
 
     @GetMapping("/genres/{genreName}")
     public Genre getGenreByName(@PathVariable String genreName) {
-        Genre genre = restTemplate.getForObject("https://" + genreServiceBaseUrl + "/genres/{genreName}", Genre.class, genreName);
+        Genre genre = restTemplate.getForObject("http://" + genreServiceBaseUrl + "/genres/{genreName}", Genre.class, genreName);
         String outputName = genre.getGenreName();
         String outputDescription = genre.getDescription();
         return new Genre(outputName, outputDescription);
