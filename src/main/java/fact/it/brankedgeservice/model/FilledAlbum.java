@@ -3,7 +3,7 @@ package fact.it.brankedgeservice.model;
 public class FilledAlbum {
     private String name;
     private String image;
-    private String genre; // CHANGE THIS FOR SERVICE GENRE
+    private String genre;
 
     private Artist artist;
 
@@ -11,7 +11,7 @@ public class FilledAlbum {
 
     public FilledAlbum(Album album, Artist artist) {
         setName(album.getName());
-        setGenre(album.getGenre()); // CHANGE THIS FOR SERVICE GENRE
+        setGenre(album.getGenre());
         setImage(album.getImage());
         setRelease(album.getRelease());
 

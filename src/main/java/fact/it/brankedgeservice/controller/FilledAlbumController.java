@@ -3,6 +3,7 @@ package fact.it.brankedgeservice.controller;
 import fact.it.brankedgeservice.model.Album;
 import fact.it.brankedgeservice.model.Artist;
 import fact.it.brankedgeservice.model.FilledAlbum;
+import fact.it.brankedgeservice.model.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -26,6 +27,9 @@ public class FilledAlbumController {
     @Value("${artistervice.baseurl}")
     private String artistServiceBaseUrl;
 
+    @Value("${genreservice.baseurl}")
+    private String genreServiceBaseUrl;
+
 
     @GetMapping("/albums")
     public List<Album> getAlbums() {
@@ -48,6 +52,25 @@ public class FilledAlbumController {
         return new FilledAlbum(album, artist);
     }
 
+    @GetMapping("/genres")
+    public List<Genre> getGenres() {
+        ResponseEntity<List<Genre>> responseEntityGenres =
+                restTemplate.exchange("http://" + genreServiceBaseUrl + "/genres",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Genre>>() {}
+                );
+
+        List<Genre> genres = responseEntityGenres.getBody();
+
+        return genres;
+    }
+
+    @GetMapping("/genres/{genreName}")
+    public Genre getGenreByName(@PathVariable String genreName) {
+        Genre genre = restTemplate.getForObject("http://" + genreServiceBaseUrl + "/genres/{genreName}", Genre.class, genreName);
+        String outputName = genre.getGenreName();
+        String outputDescription = genre.getDescription();
+        return new Genre(outputName, outputDescription);
+    }
 
 }
 
