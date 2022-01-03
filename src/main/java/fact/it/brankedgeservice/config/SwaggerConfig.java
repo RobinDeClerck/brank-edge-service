@@ -25,7 +25,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
                 .title("Advanced Programming Topics: Edge microservice")
-                .description("This page list all requests the edge microservice can execute.")
+                .description("This page lists all requests the edge microservice can execute.")
                                 .version("1.0-SNAPSHOT")
                                 .build();
     }
