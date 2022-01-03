@@ -30,9 +30,9 @@ spec:
             - name: ALBUM_SERVICE_BASEURL
               value: "album-service-server:8053"
             - name: ARTIST_SERVICE_BASEURL
-              value: "artist-info-service-server:8052"
+              value: "artist-service-server:8052"
             - name: GENRE_SERVICE_BASEURL
-              value: "genre-info-service-server:8054"
+              value: "genre-service-server:8054"
 ---
 apiVersion: v1
 kind: Service
