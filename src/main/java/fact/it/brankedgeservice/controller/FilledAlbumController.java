@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class FilledAlbumController {
     @Autowired
@@ -34,7 +36,7 @@ public class FilledAlbumController {
     @GetMapping("/albums")
     public List<Album> getAlbums() {
         ResponseEntity<List<Album>> responseEntityAlbums =
-                restTemplate.exchange("http://" + albumServiceBaseUrl + "/albums",
+                restTemplate.exchange("https://" + albumServiceBaseUrl + "/albums",
                     HttpMethod.GET, null, new ParameterizedTypeReference<List<Album>>() {}
                 );
 
@@ -45,9 +47,9 @@ public class FilledAlbumController {
 
     @GetMapping("/albums/{name}")
     public FilledAlbum getFilledAlbumByName(@PathVariable String name) {
-        Album album = restTemplate.getForObject("http://" + albumServiceBaseUrl + "/albums/{name}", Album.class, name);
+        Album album = restTemplate.getForObject("https://" + albumServiceBaseUrl + "/albums/{name}", Album.class, name);
 
-        Artist artist = restTemplate.getForObject("http://" + artistServiceBaseUrl + "/artists/{uuid}", Artist.class, album.getArtist());
+        Artist artist = restTemplate.getForObject("https://" + artistServiceBaseUrl + "/artists/{uuid}", Artist.class, album.getArtist());
 
         return new FilledAlbum(album, artist);
     }
@@ -55,7 +57,7 @@ public class FilledAlbumController {
     @GetMapping("/genres")
     public List<Genre> getGenres() {
         ResponseEntity<List<Genre>> responseEntityGenres =
-                restTemplate.exchange("http://" + genreServiceBaseUrl + "/genres",
+                restTemplate.exchange("https://" + genreServiceBaseUrl + "/genres",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Genre>>() {}
                 );
 
@@ -66,7 +68,7 @@ public class FilledAlbumController {
 
     @GetMapping("/genres/{genreName}")
     public Genre getGenreByName(@PathVariable String genreName) {
-        Genre genre = restTemplate.getForObject("http://" + genreServiceBaseUrl + "/genres/{genreName}", Genre.class, genreName);
+        Genre genre = restTemplate.getForObject("https://" + genreServiceBaseUrl + "/genres/{genreName}", Genre.class, genreName);
         String outputName = genre.getGenreName();
         String outputDescription = genre.getDescription();
         return new Genre(outputName, outputDescription);
