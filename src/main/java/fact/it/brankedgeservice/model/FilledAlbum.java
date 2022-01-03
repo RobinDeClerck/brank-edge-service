@@ -1,6 +1,7 @@
 package fact.it.brankedgeservice.model;
 
 public class FilledAlbum {
+    private String MAID;
     private String name;
     private String image;
     private String genre;
@@ -10,12 +11,21 @@ public class FilledAlbum {
     private String release;
 
     public FilledAlbum(Album album, Artist artist) {
+        setMAID(album.getMAID());
         setName(album.getName());
         setGenre(album.getGenre());
         setImage(album.getImage());
         setRelease(album.getRelease());
 
         this.artist = artist;
+    }
+
+    public String getMAID() {
+        return MAID;
+    }
+
+    public void setMAID(String MAID) {
+        this.MAID = MAID;
     }
 
     public String getName() {

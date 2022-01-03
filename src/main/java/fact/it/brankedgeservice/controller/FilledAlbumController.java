@@ -32,11 +32,6 @@ public class FilledAlbumController {
     @Value("${genreservice.baseurl}")
     private String genreServiceBaseUrl;
 
-    @GetMapping("/test2")
-    public String test() {
-        return "test";
-    }
-
     @GetMapping("/albums")
     public List<Album> getAlbums() {
         ResponseEntity<List<Album>> responseEntityAlbums =

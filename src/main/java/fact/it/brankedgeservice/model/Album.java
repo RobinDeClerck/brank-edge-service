@@ -3,6 +3,7 @@ package fact.it.brankedgeservice.model;
 
 public class Album {
     private String id;
+    private String MAID;
     private String name;
     private String image;
     private String genre;
@@ -12,7 +13,8 @@ public class Album {
     public Album() {
     }
 
-    public Album(String name, String artist, String genre, String release, String image) {
+    public Album(String MAID, String name, String artist, String genre, String release, String image) {
+        this.MAID = MAID;
         this.name = name;
         this.image = image;
         this.genre = genre;
@@ -26,6 +28,14 @@ public class Album {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getMAID() {
+        return MAID;
+    }
+
+    public void setMAID(String MAID) {
+        this.MAID = MAID;
     }
 
     public String getName() {
