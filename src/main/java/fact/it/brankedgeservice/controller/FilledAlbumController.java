@@ -60,6 +60,15 @@ public class FilledAlbumController {
 
     @GetMapping("/genres")
     public List<Genre> getGenres() {
+        System.out.println("http://" + genreServiceBaseUrl + "/genres");
+        System.out.println("http://" + genreServiceBaseUrl + "/genres");
+        System.out.println("http://" + genreServiceBaseUrl + "/genres");
+        System.out.println("http://" + genreServiceBaseUrl + "/genres");
+        System.out.println("http://" + genreServiceBaseUrl + "/genres");
+        System.out.println("http://" + genreServiceBaseUrl + "/genres");
+        System.out.println("http://" + genreServiceBaseUrl + "/genres");
+        System.out.println("http://" + genreServiceBaseUrl + "/genres");
+
         ResponseEntity<List<Genre>> responseEntityGenres =
                 restTemplate.exchange("http://" + genreServiceBaseUrl + "/genres",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Genre>>() {}
