@@ -50,22 +50,3 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USER }}/brank-edge-service:latest
-
-
-
-      - name: context
-        uses: okteto/context@latest
-        with:
-          token: ${{ secrets.OKTETO_TOKEN }}
-
-      - name: "Activate Namespace"
-        uses: okteto/namespace@latest
-        with:
-          name: robindeclerck
-
-      - name: "Trigger the pipeline"
-        uses: okteto/pipeline@latest
-        with:
-          name: pr-${{ github.event.number }}
-          timeout: 8m
-          skipIfExists: true
