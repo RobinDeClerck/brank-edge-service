@@ -1,5 +1,7 @@
 package fact.it.brankedgeservice.model;
 
+import java.util.List;
+
 public class FilledAlbum {
     private String MAID;
     private String name;
@@ -7,10 +9,11 @@ public class FilledAlbum {
     private String genre;
 
     private Artist artist;
+    private List<Song> songs;
 
     private String release;
 
-    public FilledAlbum(Album album, Artist artist) {
+    public FilledAlbum(Album album, Artist artist, List<Song> songs) {
         setMAID(album.getMAID());
         setName(album.getName());
         setGenre(album.getGenre());
@@ -18,6 +21,7 @@ public class FilledAlbum {
         setRelease(album.getRelease());
 
         this.artist = artist;
+        this.songs = songs;
     }
 
     public String getMAID() {
@@ -58,6 +62,14 @@ public class FilledAlbum {
 
     public void setArtist(Artist artist) {
         this.artist = artist;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 
     public String getRelease() {

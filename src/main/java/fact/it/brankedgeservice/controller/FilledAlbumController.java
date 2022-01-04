@@ -1,9 +1,6 @@
 package fact.it.brankedgeservice.controller;
 
-import fact.it.brankedgeservice.model.Album;
-import fact.it.brankedgeservice.model.Artist;
-import fact.it.brankedgeservice.model.FilledAlbum;
-import fact.it.brankedgeservice.model.Genre;
+import fact.it.brankedgeservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -32,8 +30,13 @@ public class FilledAlbumController {
     @Value("${genreservice.baseurl}")
     private String genreServiceBaseUrl;
 
+    @Value("${songservice.baseurl}")
+    private String songServiceBaseUrl;
+
     @GetMapping("/albums")
-    public List<Album> getAlbums() {
+    public List<FilledAlbum> getAlbums() {
+        List<FilledAlbum> returnList= new ArrayList();
+
         ResponseEntity<List<Album>> responseEntityAlbums =
                 restTemplate.exchange("http://" + albumServiceBaseUrl + "/albums",
                     HttpMethod.GET, null, new ParameterizedTypeReference<List<Album>>() {}
@@ -41,16 +44,36 @@ public class FilledAlbumController {
 
         List<Album> albums = responseEntityAlbums.getBody();
 
-        return albums;
+        for (Album album: albums) {
+            System.out.println(album.getMAID());
+            ResponseEntity<List<Song>> responseEntitySongs =
+                    restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/album/{MAID}",
+                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {}, album.getMAID()
+                    );
+            List<Song> songs = responseEntitySongs.getBody();
+
+            Artist artist = restTemplate.getForObject("http://" + artistServiceBaseUrl + "/artists/{MBID}",
+                    Artist.class, album.getMBID());
+
+            returnList.add(new FilledAlbum(album, artist, songs));
+        }
+
+        return returnList;
     }
 
-    @GetMapping("/albums/{name}")
-    public FilledAlbum getFilledAlbumByName(@PathVariable String name) {
-        Album album = restTemplate.getForObject("http://" + albumServiceBaseUrl + "/albums/{name}", Album.class, name);
+    @GetMapping("/albums/{MAID}")
+    public FilledAlbum getFilledAlbumByName(@PathVariable String MAID) {
+        Album album = restTemplate.getForObject("http://" + albumServiceBaseUrl + "/albums/{MAID}", Album.class, MAID);
 
-        Artist artist = restTemplate.getForObject("http://" + artistServiceBaseUrl + "/artists/{uuid}", Artist.class, album.getArtist());
+        Artist artist = restTemplate.getForObject("http://" + artistServiceBaseUrl + "/artists/{MBID}", Artist.class, album.getMBID());
 
-        return new FilledAlbum(album, artist);
+        ResponseEntity<List<Song>> responseEntitySongs =
+                restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/album/{MAID}",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {}, MAID
+                );
+        List<Song> songs = responseEntitySongs.getBody();
+
+        return new FilledAlbum(album, artist, songs);
     }
 
     @GetMapping("/genres")
