@@ -53,7 +53,7 @@ jobs:
 
 
 
-      - name: context
+      - name: "Okteto context"
         uses: okteto/context@latest
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
