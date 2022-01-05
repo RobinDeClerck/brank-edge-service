@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -110,6 +107,49 @@ public class FilledAlbumController {
         Artist artist = restTemplate.getForObject("http://" + artistServiceBaseUrl + "/artists/{MBID}", Artist.class, MBID);
         return artist;
     }
+//---------------------------------------------------------------------------------------------------
+
+    @PostMapping("/songs")
+    public Song addSong(@RequestBody Song songInput) {
+//        songRepository.save(song);
+
+        Song song = restTemplate.postForObject("http://" + songServiceBaseUrl + "/songs ",
+                new Song(songInput.getISRC(), songInput.getMBID(), songInput.getMAID(), songInput.getGenre(), songInput.getTitle(), songInput.getLength(), songInput.getUrl()), Song.class);
+
+        return song;
+    }
+
+    @PutMapping("/songs")
+    public Song updateSong(@RequestBody Song updateSong) {
+        Song retrievedSong = songRepository.findSongByISRC(
+                updateSong.getISRC());
+
+        retrievedSong.setISRC(updateSong.getISRC());
+        retrievedSong.setTitle(updateSong.getMBID());
+        retrievedSong.setTitle(updateSong.getMAID());
+        retrievedSong.setTitle(updateSong.getGenre());
+        retrievedSong.setTitle(updateSong.getTitle());
+        retrievedSong.setLength(updateSong.getLength());
+        retrievedSong.setUrl(updateSong.getUrl());
+
+        songRepository.save(retrievedSong);
+
+        return retrievedSong;
+    }
+
+    @DeleteMapping("/songs/{ISRC}")
+    public ResponseEntity deleteSong(@PathVariable String ISRC) {
+        Song song = songRepository.findSongByISRC(ISRC);
+        if(song!=null) {
+            songRepository.delete(song);
+            return ResponseEntity.ok().build();
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 
 
