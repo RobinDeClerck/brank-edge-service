@@ -4,6 +4,7 @@ import fact.it.brankedgeservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,19 +33,21 @@ public class FilledAlbumController {
 
     @GetMapping("/albums")
     public List<FilledAlbum> getAlbums() {
-        List<FilledAlbum> returnList= new ArrayList();
+        List<FilledAlbum> returnList = new ArrayList();
 
         ResponseEntity<List<Album>> responseEntityAlbums =
                 restTemplate.exchange("http://" + albumServiceBaseUrl + "/albums",
-                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Album>>() {}
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Album>>() {
+                        }
                 );
 
         List<Album> albums = responseEntityAlbums.getBody();
 
-        for (Album album: albums) {
+        for (Album album : albums) {
             ResponseEntity<List<Song>> responseEntitySongs =
                     restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/album/{MAID}",
-                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {}, album.getMAID()
+                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {
+                            }, album.getMAID()
                     );
             List<Song> songs = responseEntitySongs.getBody();
 
@@ -65,7 +68,8 @@ public class FilledAlbumController {
 
         ResponseEntity<List<Song>> responseEntitySongs =
                 restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/album/{MAID}",
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {}, MAID
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {
+                        }, MAID
                 );
         List<Song> songs = responseEntitySongs.getBody();
 
@@ -76,7 +80,8 @@ public class FilledAlbumController {
     public List<Genre> getGenres() {
         ResponseEntity<List<Genre>> responseEntityGenres =
                 restTemplate.exchange("http://" + genreServiceBaseUrl + "/genres",
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Genre>>() {}
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Genre>>() {
+                        }
                 );
         List<Genre> genres = responseEntityGenres.getBody();
 
@@ -95,7 +100,8 @@ public class FilledAlbumController {
     public List<Artist> getArtists() {
         ResponseEntity<List<Artist>> responseEntityGenres =
                 restTemplate.exchange("http://" + artistServiceBaseUrl + "/artists",
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Artist>>() {}
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Artist>>() {
+                        }
                 );
         List<Artist> artists = responseEntityGenres.getBody();
 
@@ -111,9 +117,8 @@ public class FilledAlbumController {
 
     @PostMapping("/songs")
     public Song addSong(@RequestBody Song songInput) {
-//        songRepository.save(song);
 
-        Song song = restTemplate.postForObject("http://" + songServiceBaseUrl + "/songs ",
+        Song song = restTemplate.postForObject("http://" + songServiceBaseUrl + "/songs",
                 new Song(songInput.getISRC(), songInput.getMBID(), songInput.getMAID(), songInput.getGenre(), songInput.getTitle(), songInput.getLength(), songInput.getUrl()), Song.class);
 
         return song;
@@ -121,8 +126,21 @@ public class FilledAlbumController {
 
     @PutMapping("/songs")
     public Song updateSong(@RequestBody Song updateSong) {
-        Song retrievedSong = songRepository.findSongByISRC(
-                updateSong.getISRC());
+//        Song retrievedSong = songRepository.findSongByISRC(
+//                updateSong.getISRC());
+//
+//        retrievedSong.setISRC(updateSong.getISRC());
+//        retrievedSong.setTitle(updateSong.getMBID());
+//        retrievedSong.setTitle(updateSong.getMAID());
+//        retrievedSong.setTitle(updateSong.getGenre());
+//        retrievedSong.setTitle(updateSong.getTitle());
+//        retrievedSong.setLength(updateSong.getLength());
+//        retrievedSong.setUrl(updateSong.getUrl());
+
+//        songRepository.save(retrievedSong);
+
+
+        Song retrievedSong = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/" + updateSong.getISRC(), Song.class);
 
         retrievedSong.setISRC(updateSong.getISRC());
         retrievedSong.setTitle(updateSong.getMBID());
@@ -132,25 +150,27 @@ public class FilledAlbumController {
         retrievedSong.setLength(updateSong.getLength());
         retrievedSong.setUrl(updateSong.getUrl());
 
-        songRepository.save(retrievedSong);
+        ResponseEntity<Song> responseEntitySong = restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/", HttpMethod.PUT, new HttpEntity<>(retrievedSong), Song.class);
+
+
 
         return retrievedSong;
     }
 
     @DeleteMapping("/songs/{ISRC}")
     public ResponseEntity deleteSong(@PathVariable String ISRC) {
-        Song song = songRepository.findSongByISRC(ISRC);
-        if(song!=null) {
-            songRepository.delete(song);
+//        Song song = songRepository.findSongByISRC(ISRC);
+
+        Song song = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/{ISRC}", Song.class, ISRC);
+        if (song != null) {
+//            songRepository.delete(song);
+
+            restTemplate.delete("http://" + songServiceBaseUrl + "/songs/{ISRC}", Song.class, ISRC);
             return ResponseEntity.ok().build();
-        }
-        else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
 
 
 }
