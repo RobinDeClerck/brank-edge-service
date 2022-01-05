@@ -126,20 +126,6 @@ public class FilledAlbumController {
 
     @PutMapping("/songs")
     public Song updateSong(@RequestBody Song updateSong) {
-//        Song retrievedSong = songRepository.findSongByISRC(
-//                updateSong.getISRC());
-//
-//        retrievedSong.setISRC(updateSong.getISRC());
-//        retrievedSong.setTitle(updateSong.getMBID());
-//        retrievedSong.setTitle(updateSong.getMAID());
-//        retrievedSong.setTitle(updateSong.getGenre());
-//        retrievedSong.setTitle(updateSong.getTitle());
-//        retrievedSong.setLength(updateSong.getLength());
-//        retrievedSong.setUrl(updateSong.getUrl());
-
-//        songRepository.save(retrievedSong);
-
-
         Song retrievedSong = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/" + updateSong.getISRC(), Song.class);
 
         retrievedSong.setISRC(updateSong.getISRC());
@@ -152,18 +138,14 @@ public class FilledAlbumController {
 
         ResponseEntity<Song> responseEntitySong = restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/", HttpMethod.PUT, new HttpEntity<>(retrievedSong), Song.class);
 
-
-
         return retrievedSong;
     }
 
     @DeleteMapping("/songs/{ISRC}")
     public ResponseEntity deleteSong(@PathVariable String ISRC) {
-//        Song song = songRepository.findSongByISRC(ISRC);
 
         Song song = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/{ISRC}", Song.class, ISRC);
         if (song != null) {
-//            songRepository.delete(song);
 
             restTemplate.delete("http://" + songServiceBaseUrl + "/songs/{ISRC}", Song.class, ISRC);
             return ResponseEntity.ok().build();
