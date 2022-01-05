@@ -45,7 +45,6 @@ public class FilledAlbumController {
         List<Album> albums = responseEntityAlbums.getBody();
 
         for (Album album: albums) {
-            System.out.println(album.getMAID());
             ResponseEntity<List<Song>> responseEntitySongs =
                     restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/album/{MAID}",
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {}, album.getMAID()
@@ -94,6 +93,25 @@ public class FilledAlbumController {
         String outputDescription = genre.getDescription();
         return new Genre(outputName, outputDescription);
     }
+
+    @GetMapping("/artists")
+    public List<Artist> getArtists() {
+        ResponseEntity<List<Artist>> responseEntityGenres =
+                restTemplate.exchange("http://" + artistServiceBaseUrl + "/artists",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Artist>>() {}
+                );
+        List<Artist> artists = responseEntityGenres.getBody();
+
+        return artists;
+    }
+
+    @GetMapping("/artists/{MBID}")
+    public Artist getArtistByMBID(@PathVariable String MBID) {
+        Artist artist = restTemplate.getForObject("http://" + artistServiceBaseUrl + "/artists/{MBID}", Artist.class, MBID);
+        return artist;
+    }
+
+
 
 }
 
