@@ -1,6 +1,6 @@
 # APT Project
 Repo Advanced Programming Topics Eindproject (groepsproject).\
-Dit project bevat een aplicatie die gebruik maakt van microservices in Java Spring Boot, unit & integration tests, Dockerfiles, Kubernetes
+Dit project bevat een applicatie die gebruik maakt van microservices in Java Spring Boot, unit & integration tests, Dockerfiles, Kubernetes
 
 Belangrijk:
 - Een song heeft een ISRC code (handig: https://www.isrcfinder.com/)
@@ -34,7 +34,7 @@ Belangrijk:
       [Dockerhub](https://hub.docker.com/r/jonaulaerts/genre-service)
   - [FRONTEND](#frontend)
     - [Frontend repository](https://github.com/RobinDeClerck/music-frontend) |
-      [Okteto](https://frontend-server-robindeclerck.cloud.okteto.net/) |
+      [Okteto FRONTEND LINK](https://frontend-server-robindeclerck.cloud.okteto.net/) |
       [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend)
 - [Okteto](#okteto)
 
@@ -449,7 +449,7 @@ Used: [https://brank-edge-service-server-robindeclerck.cloud.okteto.net/genres/R
 ### Frontend
 
 [Frontend repository](https://github.com/RobinDeClerck/music-frontend) |
-[Okteto](https://frontend-server-robindeclerck.cloud.okteto.net/) |
+[Okteto FRONTEND LINK](https://frontend-server-robindeclerck.cloud.okteto.net/) |
 [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend)
 
 ![frontend](https://cdn.discordapp.com/attachments/668890794882629662/928774887521288292/frontend.PNG)
