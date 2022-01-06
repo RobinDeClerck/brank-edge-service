@@ -8,6 +8,7 @@ Belangrijk:
 - Een artist heeft een MBID code (Music Band Identifier)
 
 ##Table of contents
+
 - [Project](#project)
   - [Team](#team)
   - [Thema](#thema)
@@ -39,12 +40,15 @@ Belangrijk:
 
 
 ##Project
+
 ### Team
+
 - [Robin De Clerck](https://github.com/RobinDeClerck)
 - [Jo Naulaerts](https://github.com/JoNaulaerts)
 - [Anthony Decap](https://github.com/anthonydecap)
 
 ###Thema
+
 Onze applicatie bestaat uit muziek waarbij we de song hebben opgedeeld in 4 verschillende services.
 - Song
 - Genre
@@ -56,18 +60,22 @@ Al deze services werken samen om 1 grote applicatie te creëren.
 ##Services
 
 ###Brank-Edge-service
+
 [Brank-Edge-service repository](https://github.com/RobinDeClerck/brank-edge-service) |
 [Okteto](https://brank-edge-service-server-robindeclerck.cloud.okteto.net/) |
 [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/brank-edge-service)
 
 ####Schema
+
 ![schema](https://cdn.discordapp.com/attachments/668890794882629662/928740542244880474/APT-Schema.png)
 
 ####SwaggerUI NEEDS UPDATE!!!
+
 ![swaggerui](https://cdn.discordapp.com/attachments/668890794882629662/928743967879745547/swaggerui.PNG)
 
 
 ####Postman requests
+
 Open de request door te klikken op de titel.
 <details><summary>GET /albums</summary>
 
@@ -415,27 +423,31 @@ Used: [https://brank-edge-service-server-robindeclerck.cloud.okteto.net/genres/R
 </details>
 
 ###Artist-service
+
 [Artist-service repository](https://github.com/RobinDeClerck/artist-service) |
 [Okteto](https://artist-service-server-robindeclerck.cloud.okteto.net) (testing only!) |
 [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/artist-service)
 
-
 ###Album-service
+
 [Album-service repository](https://github.com/RobinDeClerck/album-service) |
 [Okteto](https://album-service-server-robindeclerck.cloud.okteto.net) (testing only!) |
 [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/album-service)
 
 ###Song-service
+
 [Song-service repository](https://github.com/anthonydecap/service-song) |
 [Okteto](https://song-service-server-robindeclerck.cloud.okteto.net/) (testing only!) |
 [Dockerhub](https://hub.docker.com/r/realnigel/song-service)
 
 ###Genre-service
+
 [Genre-service repository](https://github.com/JoNaulaerts/genre-service) |
 [Okteto](https://genre-service-server-robindeclerck.cloud.okteto.net/) (testing only!) |
 [Dockerhub](https://hub.docker.com/r/jonaulaerts/genre-service)
 
 ###Frontend
+
 [Frontend repository](https://github.com/RobinDeClerck/music-frontend) |
 [Okteto](https://frontend-server-robindeclerck.cloud.okteto.net/) |
 [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend)
@@ -443,6 +455,7 @@ Used: [https://brank-edge-service-server-robindeclerck.cloud.okteto.net/genres/R
 ![frontend](https://cdn.discordapp.com/attachments/668890794882629662/928774887521288292/frontend.PNG)
 
 ##Okteto
+
 All repositories run on Okteto with a K8s file found in the 'K8s' folder in every repository.\
 On deploying Okteto will automatically read the yaml files in the 'K8s' folder and run 'kubectl apply'.
 ![okteto](https://cdn.discordapp.com/attachments/668890794882629662/928775961707700254/okteto-deployments.PNG)
