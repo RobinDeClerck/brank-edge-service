@@ -133,36 +133,26 @@ public class FilledAlbumController {
     }
 
     @PostMapping("/songs")
-    public Song addSong(@RequestBody Song songInput) {
+    public Song addSong(@RequestParam String isrc, @RequestParam String mbid, @RequestParam String maid, @RequestParam String genre, @RequestParam String title, @RequestParam Integer length, @RequestParam String url) {
 
         Song song = restTemplate.postForObject("http://" + songServiceBaseUrl + "/songs",
-                new Song(songInput.getISRC(), songInput.getMBID(), songInput.getMAID(), songInput.getGenre(), songInput.getTitle(), songInput.getLength(), songInput.getUrl()), Song.class);
+                new Song(isrc, mbid, maid, genre, title, length, url), Song.class);
 
         return song;
     }
 
-//    @PostMapping("/songs")
-//    public Song addSong(@RequestParam String ISRC, @RequestParam String MBID, @RequestParam String MAID, @RequestParam String Genre, @RequestParam String Title, @RequestParam Integer Length, @RequestParam String Url) {
-//
-//        Song song = restTemplate.postForObject("http://" + songServiceBaseUrl + "/songs",
-//                new Song(ISRC, MBID, MAID, Genre, Title, Length, Url), Song.class);
-//
-//        return song;
-//    }
-
     @PutMapping("/songs")
-    public Song updateSong(@RequestBody Song updateSong) {
-        Song retrievedSong = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/" + updateSong.getISRC(), Song.class);
+    public Song updateSong(@RequestParam String isrc, @RequestParam String mbid, @RequestParam String maid, @RequestParam String genre, @RequestParam String title, @RequestParam Integer length, @RequestParam String url) {
+        Song song = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/" + isrc, Song.class);
+        song.setMBID(mbid);
+        song.setMAID(maid);
+        song.setGenre(genre);
+        song.setTitle(title);
+        song.setLength(length);
+        song.setUrl(url);
 
-        retrievedSong.setISRC(updateSong.getISRC());
-        retrievedSong.setTitle(updateSong.getMBID());
-        retrievedSong.setTitle(updateSong.getMAID());
-        retrievedSong.setTitle(updateSong.getGenre());
-        retrievedSong.setTitle(updateSong.getTitle());
-        retrievedSong.setLength(updateSong.getLength());
-        retrievedSong.setUrl(updateSong.getUrl());
-
-        ResponseEntity<Song> responseEntitySong = restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/", HttpMethod.PUT, new HttpEntity<>(retrievedSong), Song.class);
+        ResponseEntity<Song> responseEntitySong = restTemplate.exchange("http://" + songServiceBaseUrl + "/songs", HttpMethod.PUT, new HttpEntity<>(song), Song.class);
+        Song retrievedSong = responseEntitySong.getBody();
 
         return retrievedSong;
     }
