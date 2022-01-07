@@ -64,11 +64,9 @@ public class BrankEdgeUnitTests {
 
     private Album album1 = new Album("cd76f76b-ff15-3784-a71d-4da3078a6851","Pablo Honey", "a74b1b7f-71a5-4011-9441-d0b5e4122711", "Rock", "1993-02-22", "https://i.scdn.co/image/ab67616d00001e02df55e326ed144ab4f5cecf95");
     private Album album2 = new Album("2b98e6d7-a521-332f-961e-d281ba33ba3d","Reggatta de Blanc", "9e0e2b01-41db-4008-bd8b-988977d6019a", "Rock", "1979-10-02", "https://i.scdn.co/image/ab67616d00001e028ec81cc654b45ade8bdf1486");
-    private Album album3 = new Album("af2e8e23-e9c3-4e67-8ad8-66387c5898fd","Black Holes and Revelations", "9c9f1380-2516-4fc9-a3e6-f9f61941d090", "Rock", "2006-07-03", "https://i.scdn.co/image/ab67616d00001e0228933b808bfb4cbbd0385400");
 
     private Artist artist1 = new Artist("a74b1b7f-71a5-4011-9441-d0b5e4122711","Radiohead", "Rock band", "United Kingdom",Arrays.asList("Thom Yorke", "Jonny Greenwood", "Ed O'Brien", "Colin Greenwood", "Philip Selway"),"https://i.scdn.co/image/ab676186000010161802a4cbec82e078cc15cbb0");
     private Artist artist2 = new Artist("9e0e2b01-41db-4008-bd8b-988977d6019a", "The Police", "Rock band", "United Kingdom", Arrays.asList("Sting", "Stewart Copeland", "Andy Summers", "Henry Padovani"), "https://i.scdn.co/image/ab67618600001016af496a5f2377f1149d2a5cf3");
-    private Artist artist3 = new Artist("9c9f1380-2516-4fc9-a3e6-f9f61941d090","Muse", "Rock band", "United Kingdom", Arrays.asList("Matt Bellamy", "Chris Wolstenholme", "Dominic Howard"), "https://i.scdn.co/image/ab67618600001016ef59f1c62339f247d38ded80");
 
     private Song song1 = new Song("GBAYE9200113","a74b1b7f-71a5-4011-9441-d0b5e4122711","cd76f76b-ff15-3784-a71d-4da3078a6851","Rock","You",208,"5KZ0qobWEFl892YjIC02SE");
     private Song song2 = new Song("GBAYE9200070","a74b1b7f-71a5-4011-9441-d0b5e4122711","cd76f76b-ff15-3784-a71d-4da3078a6851","Rock","Creep",238,"70LcF31zb1H0PyJoS1Sx1r");
@@ -80,15 +78,14 @@ public class BrankEdgeUnitTests {
     private Song song6 = new Song("GBAAM0201172","9e0e2b01-41db-4008-bd8b-988977d6019a","2b98e6d7-a521-332f-961e-d281ba33ba3d","Rock","It's Alright For You",192,"5fTI7JCaMRK09WtwG8ZrRK");
     private List<Song> songsFromAlbum2 = Arrays.asList(song4, song5, song6);
 
-    private Song song7 = new Song("GBAHT0500591","9c9f1380-2516-4fc9-a3e6-f9f61941d090","af2e8e23-e9c3-4e67-8ad8-66387c5898fd","Rock","Take a Bow",275,"4jrCMOG9OPe6iF4vWFxatb");
-    private Song song8 = new Song("GBAHT0500592","9c9f1380-2516-4fc9-a3e6-f9f61941d090","af2e8e23-e9c3-4e67-8ad8-66387c5898fd","Rock","Starlight",240,"3skn2lauGk7Dx6bVIt5DVj");
-    private Song song9 = new Song("GBAHT0500593","9c9f1380-2516-4fc9-a3e6-f9f61941d090","af2e8e23-e9c3-4e67-8ad8-66387c5898fd","Rock","Supermassive Black Hole",212,"3lPr8ghNDBLc2uZovNyLs9");
-    private List<Song> songsFromAlbum3 = Arrays.asList(song7, song8, song9);
-
     private FilledAlbum filledAlbum1 = new FilledAlbum(album1, artist1, songsFromAlbum1);
     private FilledAlbum filledAlbum2 = new FilledAlbum(album2, artist2, songsFromAlbum2);
-    private FilledAlbum filledAlbum3 = new FilledAlbum(album3, artist3, songsFromAlbum3);
-    private List<FilledAlbum> allFilledAlbums = Arrays.asList(filledAlbum1, filledAlbum2, filledAlbum3);
+    private List<FilledAlbum> allFilledAlbums = Arrays.asList(filledAlbum1, filledAlbum2);
+
+    @Test
+    void whenGetAlbums_thenReturnFilledAlbumsJson() throws Exception {
+
+    }
 
     @Test
     void whenGetAlbumByName_thenReturnFilledAlbumJson() throws Exception {
