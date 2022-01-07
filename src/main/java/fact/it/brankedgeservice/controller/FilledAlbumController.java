@@ -142,14 +142,14 @@ public class FilledAlbumController {
     @DeleteMapping("/songs/{ISRC}")
     public ResponseEntity deleteSong(@PathVariable String ISRC) {
 
-        Song song = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/{ISRC}", Song.class, ISRC);
-        if (song != null) {
+//        Song song = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/{ISRC}", Song.class, ISRC);
+//        if (song != null) {
 
-            restTemplate.delete("http://" + songServiceBaseUrl + "/songs/{ISRC}", Song.class, ISRC);
+            restTemplate.delete("http://" + songServiceBaseUrl + "/songs/{ISRC}", ISRC);
             return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
     }
 
 

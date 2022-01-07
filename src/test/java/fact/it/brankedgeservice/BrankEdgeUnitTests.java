@@ -2,6 +2,7 @@ package fact.it.brankedgeservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fact.it.brankedgeservice.model.Genre;
+import fact.it.brankedgeservice.model.Song;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +111,103 @@ public class BrankEdgeUnitTests {
 
     }
 
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void whenAddSong_thenReturnSongJson() throws Exception {
+
+        Song song1 = new Song("GBAHT2000193","aa62b28e-b6d4-4086-91d4-e5fac1ed56f3","dd7e7ced-a44d-4ce5-9654-c60a0d71fc51","Rock","Trouble’s Coming",228,"6voIJ7OWwRabSZDC77D5Hp");
+
+        // POST Song
+        mockServer.expect(ExpectedCount.once(),
+                requestTo(new URI("http://" + songServiceBaseUrl + "/songs")))
+                .andExpect(method(HttpMethod.POST))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(song1))
+                );
+
+//        // GET song 1 info
+//        mockServer.expect(ExpectedCount.once(),
+//                requestTo(new URI("http://" + bookInfoServiceBaseUrl + "/books/ISBN1")))
+////                .andExpect(method(HttpMethod.GET))
+////                .andRespond(withStatus(HttpStatus.OK)
+////                        .contentType(MediaType.APPLICATION_JSON)
+////                        .body(mapper.writeValueAsString(song1))
+////                );
+
+        mockMvc.perform(post("/rankings")
+                .param("ISRC", song1.getISRC())
+                .param("MBID", song1.getMBID())
+                .param("MAID", song1.getMAID())
+                .param("genre", song1.getGenre())
+                .param("title", song1.getTitle())
+                .param("length", song1.getLength().toString())
+                .param("url", song1.getUrl())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.ISRC", is("GBAHT2000193")))
+                .andExpect(jsonPath("$.MBID", is("aa62b28e-b6d4-4086-91d4-e5fac1ed56f3")))
+                .andExpect(jsonPath("$.MAID", is("dd7e7ced-a44d-4ce5-9654-c60a0d71fc51")))
+                .andExpect(jsonPath("$.genre", is("Rock")))
+                .andExpect(jsonPath("$.title", is("Trouble’s Coming")))
+                .andExpect(jsonPath("$.length", is(228)))
+                .andExpect(jsonPath("$.url", is("6voIJ7OWwRabSZDC77D5Hp")));
+    }
+
+    @Test
+    public void whenUpdateSong_thenReturnSongJson() throws Exception {
+
+        Song song2 = new Song("GBAHT20001931111","aa62b28e-b6d4-4086-91d4-e5fac1ed56f31111","dd7e7ced-a44d-4ce5-9654-c60a0d71fc511111","Rock1111","Trouble’s Coming1111",2281111,"6voIJ7OWwRabSZDC77D5Hp1111");
+
+        // POST Song
+        mockServer.expect(ExpectedCount.once(),
+                requestTo(new URI("http://" + songServiceBaseUrl + "/songs")))
+                .andExpect(method(HttpMethod.PUT))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(song2))
+                );
+
+        mockMvc.perform(put("/rankings")
+                .param("ISRC", song2.getISRC())
+                .param("MBID", song2.getMBID())
+                .param("MAID", song2.getMAID())
+                .param("genre", song2.getGenre())
+                .param("title", song2.getTitle())
+                .param("length", song2.getLength().toString())
+                .param("url", song2.getUrl())
+                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.ISRC", is("GBAHT20001931111")))
+                .andExpect(jsonPath("$.MBID", is("aa62b28e-b6d4-4086-91d4-e5fac1ed56f31111")))
+                .andExpect(jsonPath("$.MAID", is("dd7e7ced-a44d-4ce5-9654-c60a0d71fc511111")))
+                .andExpect(jsonPath("$.genre", is("Rock1111")))
+                .andExpect(jsonPath("$.title", is("Trouble’s Coming1111")))
+                .andExpect(jsonPath("$.length", is(2281111)))
+                .andExpect(jsonPath("$.url", is("6voIJ7OWwRabSZDC77D5Hp1111")));
+
+    }
+
+    @Test
+    public void whenDeleteSong_thenReturnStatusOk() throws Exception {
+
+        // DELETE song
+        mockServer.expect(ExpectedCount.once(),
+                requestTo(new URI("http://" + songServiceBaseUrl + "/songs/GBAHT2000193")))
+                .andExpect(method(HttpMethod.DELETE))
+                .andRespond(withStatus(HttpStatus.OK)
+                );
+
+        mockMvc.perform(delete("http://" + songServiceBaseUrl + "/songs/{ISRC}", "GBAHT2000193"))
+                .andExpect(status().isOk());
+    }
 
 }
 
