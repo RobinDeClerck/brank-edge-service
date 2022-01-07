@@ -1282,12 +1282,20 @@ Status 200 OK
 [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/artist-service) |
 [Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_artist-service)
 
+**Requests**:\
+**GET** /artists\
+**GET** /artists/{MBID}
+
 ### Album-service
 
 [Album-service repository](https://github.com/RobinDeClerck/album-service) |
 [Okteto](https://album-service-server-robindeclerck.cloud.okteto.net) (for testing only!) |
 [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/album-service) |
 [Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_album-service)
+
+**Requests**:\
+**GET** /albums\
+**GET** /albums/{MAID}
 
 ### Song-service
 
@@ -1296,12 +1304,25 @@ Status 200 OK
 [Dockerhub](https://hub.docker.com/r/realnigel/song-service) |
 [Sonarcloud](https://sonarcloud.io/project/overview?id=anthonydecap_service-song)
 
+**Requests**:\
+**GET** /songs/artist/{MBID}\
+**GET** /songs/album/{MAID}\
+**GET** /songs/genre/{genre}\
+**GET** /songs/{ISRC}\
+**POST** /songs\
+**PUT** /songs\
+**DELETE** /songs/{ISRC}
+
 ### Genre-service
 
 [Genre-service repository](https://github.com/JoNaulaerts/genre-service) |
 [Okteto](https://genre-service-server-robindeclerck.cloud.okteto.net/) (for testing only!) |
 [Dockerhub](https://hub.docker.com/r/jonaulaerts/genre-service) |
 [Sonarcloud](https://sonarcloud.io/project/overview?id=JoNaulaerts_genre-service)
+
+**Requests**:\
+**GET** /genres\
+**GET** /genres/{genreName}
 
 ### Frontend
 
