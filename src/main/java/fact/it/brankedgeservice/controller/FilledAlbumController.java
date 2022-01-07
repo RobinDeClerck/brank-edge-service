@@ -91,9 +91,7 @@ public class FilledAlbumController {
     @GetMapping("/genres/{genreName}")
     public Genre getGenreByName(@PathVariable String genreName) {
         Genre genre = restTemplate.getForObject("http://" + genreServiceBaseUrl + "/genres/{genreName}", Genre.class, genreName);
-        String outputName = genre.getGenreName();
-        String outputDescription = genre.getDescription();
-        return new Genre(outputName, outputDescription);
+        return genre;
     }
 
     @GetMapping("/artists")
