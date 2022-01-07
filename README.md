@@ -3,9 +3,9 @@ Repo Advanced Programming Topics Eindproject (groepsproject).\
 Dit project bevat een applicatie die gebruik maakt van microservices in Java Spring Boot, unit & integration tests, Dockerfiles, Kubernetes
 
 Belangrijk:
-- Een song heeft een ISRC code (handig: https://www.isrcfinder.com/)
-- Een album heeft een MAID code (Music Album Identifier)
-- Een artist heeft een MBID code (Music Band Identifier)
+- Een song heeft een ISRC (International Standard Recording Code) code (handig: https://www.isrcfinder.com/)
+- Een album heeft een MAID code (Music Album Identifier)  (based on: https://musicbrainz.org/doc/Release_Group)
+- Een artist heeft een MBID code (Music Band Identifier) (based on: https://musicbrainz.org/doc/MusicBrainz_Identifier)
 
 ## Table of contents
 
