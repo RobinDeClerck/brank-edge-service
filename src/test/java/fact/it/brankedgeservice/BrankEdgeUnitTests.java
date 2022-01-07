@@ -168,8 +168,44 @@ public class BrankEdgeUnitTests {
                 .andExpect(jsonPath("$[0].songs[2].url", is("5qsgK2wcodYCEbgbdCpYOG")))
                 .andExpect(jsonPath("$[0].songs[2].mbid", is("a74b1b7f-71a5-4011-9441-d0b5e4122711")))
                 .andExpect(jsonPath("$[0].songs[2].maid", is("cd76f76b-ff15-3784-a71d-4da3078a6851")))
-                .andExpect(jsonPath("$[0].songs[2].isrc", is("GBAYE9300105")));
+                .andExpect(jsonPath("$[0].songs[2].isrc", is("GBAYE9300105")))
 
+
+                .andExpect(jsonPath("$[1].maid", is("2b98e6d7-a521-332f-961e-d281ba33ba3d")))
+                .andExpect(jsonPath("$[1].name", is("Reggatta de Blanc")))
+                .andExpect(jsonPath("$[1].image", is("https://i.scdn.co/image/ab67616d00001e028ec81cc654b45ade8bdf1486")))
+                .andExpect(jsonPath("$[1].genre", is("Rock")))
+
+                .andExpect(jsonPath("$[1].artist.name", is("The Police")))
+                .andExpect(jsonPath("$[1].artist.type", is("Rock band")))
+                .andExpect(jsonPath("$[1].artist.originCountry", is("United Kingdom")))
+                .andExpect(jsonPath("$[1].artist.members", is(Arrays.asList("Sting", "Stewart Copeland", "Andy Summers", "Henry Padovani"))))
+                .andExpect(jsonPath("$[1].artist.bannerImage", is("https://i.scdn.co/image/ab67618600001016af496a5f2377f1149d2a5cf3")))
+                .andExpect(jsonPath("$[1].artist.mbid", is("9e0e2b01-41db-4008-bd8b-988977d6019a")))
+
+                .andExpect(jsonPath("$[1].songs[0].genre", is("Rock")))
+                .andExpect(jsonPath("$[1].songs[0].title", is("Message In A Bottle")))
+                .andExpect(jsonPath("$[1].songs[0].length", is(290)))
+                .andExpect(jsonPath("$[1].songs[0].url", is("1oYYd2gnWZYrt89EBXdFiO")))
+                .andExpect(jsonPath("$[1].songs[0].mbid", is("9e0e2b01-41db-4008-bd8b-988977d6019a")))
+                .andExpect(jsonPath("$[1].songs[0].maid", is("2b98e6d7-a521-332f-961e-d281ba33ba3d")))
+                .andExpect(jsonPath("$[1].songs[0].isrc", is("GBAAM0201170")))
+
+                .andExpect(jsonPath("$[1].songs[1].genre", is("Rock")))
+                .andExpect(jsonPath("$[1].songs[1].title", is("Reggatta De Blanc")))
+                .andExpect(jsonPath("$[1].songs[1].length", is(185)))
+                .andExpect(jsonPath("$[1].songs[1].url", is("2EEp2vTGSRDSLHWUF80EZZ")))
+                .andExpect(jsonPath("$[1].songs[1].mbid", is("9e0e2b01-41db-4008-bd8b-988977d6019a")))
+                .andExpect(jsonPath("$[1].songs[1].maid", is("2b98e6d7-a521-332f-961e-d281ba33ba3d")))
+                .andExpect(jsonPath("$[1].songs[1].isrc", is("GBAAM0201171")))
+
+                .andExpect(jsonPath("$[1].songs[2].genre", is("Rock")))
+                .andExpect(jsonPath("$[1].songs[2].title", is("It's Alright For You")))
+                .andExpect(jsonPath("$[1].songs[2].length", is(192)))
+                .andExpect(jsonPath("$[1].songs[2].url", is("5fTI7JCaMRK09WtwG8ZrRK")))
+                .andExpect(jsonPath("$[1].songs[2].mbid", is("9e0e2b01-41db-4008-bd8b-988977d6019a")))
+                .andExpect(jsonPath("$[1].songs[2].maid", is("2b98e6d7-a521-332f-961e-d281ba33ba3d")))
+                .andExpect(jsonPath("$[1].songs[2].isrc", is("GBAAM0201172")));
     }
 
     @Test
