@@ -67,6 +67,7 @@ public class BrankEdgeUnitTests {
 
     private Artist artist1 = new Artist("a74b1b7f-71a5-4011-9441-d0b5e4122711","Radiohead", "Rock band", "United Kingdom",Arrays.asList("Thom Yorke", "Jonny Greenwood", "Ed O'Brien", "Colin Greenwood", "Philip Selway"),"https://i.scdn.co/image/ab676186000010161802a4cbec82e078cc15cbb0");
     private Artist artist2 = new Artist("9e0e2b01-41db-4008-bd8b-988977d6019a", "The Police", "Rock band", "United Kingdom", Arrays.asList("Sting", "Stewart Copeland", "Andy Summers", "Henry Padovani"), "https://i.scdn.co/image/ab67618600001016af496a5f2377f1149d2a5cf3");
+    private List<Artist> allArtists = Arrays.asList(artist1, artist2);
 
     private Song song1 = new Song("GBAYE9200113","a74b1b7f-71a5-4011-9441-d0b5e4122711","cd76f76b-ff15-3784-a71d-4da3078a6851","Rock","You",208,"5KZ0qobWEFl892YjIC02SE");
     private Song song2 = new Song("GBAYE9200070","a74b1b7f-71a5-4011-9441-d0b5e4122711","cd76f76b-ff15-3784-a71d-4da3078a6851","Rock","Creep",238,"70LcF31zb1H0PyJoS1Sx1r");
@@ -275,6 +276,37 @@ public class BrankEdgeUnitTests {
                 .andExpect(jsonPath("$.songs[2].mbid", is("a74b1b7f-71a5-4011-9441-d0b5e4122711")))
                 .andExpect(jsonPath("$.songs[2].maid", is("cd76f76b-ff15-3784-a71d-4da3078a6851")))
                 .andExpect(jsonPath("$.songs[2].isrc", is("GBAYE9300105")));
+    }
+
+    @Test
+    public void whenGetArtists_thenReturnArtistsJson() throws Exception {
+        // GET all artists
+        mockServer.expect(ExpectedCount.once(),
+                        requestTo(new URI("http://" + artistServiceBaseUrl + "/artists")))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(allArtists))
+                );
+
+        mockMvc.perform(get("/artists"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+
+                .andExpect(jsonPath("$[0].mbid", is("a74b1b7f-71a5-4011-9441-d0b5e4122711")))
+                .andExpect(jsonPath("$[0].name", is("Radiohead")))
+                .andExpect(jsonPath("$[0].type", is("Rock band")))
+                .andExpect(jsonPath("$[0].originCountry", is("United Kingdom")))
+                .andExpect(jsonPath("$[0].members", is(Arrays.asList("Thom Yorke", "Jonny Greenwood", "Ed O'Brien", "Colin Greenwood", "Philip Selway"))))
+                .andExpect(jsonPath("$[0].bannerImage", is("https://i.scdn.co/image/ab676186000010161802a4cbec82e078cc15cbb0")))
+
+                .andExpect(jsonPath("$[1].mbid", is("9e0e2b01-41db-4008-bd8b-988977d6019a")))
+                .andExpect(jsonPath("$[1].name", is("The Police")))
+                .andExpect(jsonPath("$[1].type", is("Rock band")))
+                .andExpect(jsonPath("$[1].originCountry", is("United Kingdom")))
+                .andExpect(jsonPath("$[1].members", is(Arrays.asList("Sting", "Stewart Copeland", "Andy Summers", "Henry Padovani"))))
+                .andExpect(jsonPath("$[1].bannerImage", is("https://i.scdn.co/image/ab67618600001016af496a5f2377f1149d2a5cf3")));
     }
 
     @Test
