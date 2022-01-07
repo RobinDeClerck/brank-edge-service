@@ -84,6 +84,91 @@ public class BrankEdgeUnitTests {
 
     @Test
     void whenGetAlbums_thenReturnFilledAlbumsJson() throws Exception {
+        // GET all albums
+        mockServer.expect(ExpectedCount.once(),
+                        requestTo(new URI("http://" + albumServiceBaseUrl + "/albums")))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(allFilledAlbums))
+                );
+
+        // GET songs for album 1
+        mockServer.expect(ExpectedCount.once(),
+                        requestTo(new URI("http://" + songServiceBaseUrl + "/songs/album/" + album1.getMAID())))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(songsFromAlbum1))
+                );
+
+        // GET artist for album 1
+        mockServer.expect(ExpectedCount.once(),
+                        requestTo(new URI("http://" + artistServiceBaseUrl + "/artists/" + album1.getMBID())))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(artist1))
+                );
+
+        // GET songs for album 2
+        mockServer.expect(ExpectedCount.once(),
+                        requestTo(new URI("http://" + songServiceBaseUrl + "/songs/album/" + album2.getMAID())))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(songsFromAlbum2))
+                );
+
+        // GET artist for album 2
+        mockServer.expect(ExpectedCount.once(),
+                        requestTo(new URI("http://" + artistServiceBaseUrl + "/artists/" + album2.getMBID())))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(artist2))
+                );
+
+        mockMvc.perform(get("/albums"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+
+                .andExpect(jsonPath("$[0].maid", is("cd76f76b-ff15-3784-a71d-4da3078a6851")))
+                .andExpect(jsonPath("$[0].name", is("Pablo Honey")))
+                .andExpect(jsonPath("$[0].image", is("https://i.scdn.co/image/ab67616d00001e02df55e326ed144ab4f5cecf95")))
+                .andExpect(jsonPath("$[0].genre", is("Rock")))
+
+                .andExpect(jsonPath("$[0].artist.name", is("Radiohead")))
+                .andExpect(jsonPath("$[0].artist.type", is("Rock band")))
+                .andExpect(jsonPath("$[0].artist.originCountry", is("United Kingdom")))
+                .andExpect(jsonPath("$[0].artist.members", is(Arrays.asList("Thom Yorke", "Jonny Greenwood", "Ed O'Brien", "Colin Greenwood", "Philip Selway"))))
+                .andExpect(jsonPath("$[0].artist.bannerImage", is("https://i.scdn.co/image/ab676186000010161802a4cbec82e078cc15cbb0")))
+                .andExpect(jsonPath("$[0].artist.mbid", is("a74b1b7f-71a5-4011-9441-d0b5e4122711")))
+
+                .andExpect(jsonPath("$[0].songs[0].genre", is("Rock")))
+                .andExpect(jsonPath("$[0].songs[0].title", is("You")))
+                .andExpect(jsonPath("$[0].songs[0].length", is(208)))
+                .andExpect(jsonPath("$[0].songs[0].url", is("5KZ0qobWEFl892YjIC02SE")))
+                .andExpect(jsonPath("$[0].songs[0].mbid", is("a74b1b7f-71a5-4011-9441-d0b5e4122711")))
+                .andExpect(jsonPath("$[0].songs[0].maid", is("cd76f76b-ff15-3784-a71d-4da3078a6851")))
+                .andExpect(jsonPath("$[0].songs[0].isrc", is("GBAYE9200113")))
+
+                .andExpect(jsonPath("$[0].songs[1].genre", is("Rock")))
+                .andExpect(jsonPath("$[0].songs[1].title", is("Creep")))
+                .andExpect(jsonPath("$[0].songs[1].length", is(238)))
+                .andExpect(jsonPath("$[0].songs[1].url", is("70LcF31zb1H0PyJoS1Sx1r")))
+                .andExpect(jsonPath("$[0].songs[1].mbid", is("a74b1b7f-71a5-4011-9441-d0b5e4122711")))
+                .andExpect(jsonPath("$[0].songs[1].maid", is("cd76f76b-ff15-3784-a71d-4da3078a6851")))
+                .andExpect(jsonPath("$[0].songs[1].isrc", is("GBAYE9200070")))
+
+                .andExpect(jsonPath("$[0].songs[2].genre", is("Rock")))
+                .andExpect(jsonPath("$[0].songs[2].title", is("How Do You?")))
+                .andExpect(jsonPath("$[0].songs[2].length", is(132)))
+                .andExpect(jsonPath("$[0].songs[2].url", is("5qsgK2wcodYCEbgbdCpYOG")))
+                .andExpect(jsonPath("$[0].songs[2].mbid", is("a74b1b7f-71a5-4011-9441-d0b5e4122711")))
+                .andExpect(jsonPath("$[0].songs[2].maid", is("cd76f76b-ff15-3784-a71d-4da3078a6851")))
+                .andExpect(jsonPath("$[0].songs[2].isrc", is("GBAYE9300105")));
 
     }
 
