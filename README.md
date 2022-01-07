@@ -43,6 +43,7 @@ Belangrijk:
       [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend) |
       [Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_music-frontend)
 - [Okteto](#okteto)
+- [Resultaat / behaalde eisen](#resultaat)
 
 
 ## Project
@@ -75,12 +76,12 @@ Deze microservices werden samengebracht in 1 centrale service: de brank-edge-ser
 
 #### Schema
 
-![schema](https://cdn.discordapp.com/attachments/668890794882629662/928740542244880474/APT-Schema.png)
+![schema](https://cdn.discordapp.com/attachments/668890794882629662/929112690348154970/APT-Schema.png)
 
 #### SwaggerUI
 [Goto SwaggerUI page](https://brank-edge-service-server-robindeclerck.cloud.okteto.net/swagger-ui.html)
 
-![swaggerui](https://cdn.discordapp.com/attachments/668890794882629662/929066922073530448/swagger2.PNG)
+![swaggerui](https://cdn.discordapp.com/attachments/668890794882629662/929112778541764628/unknown.png)
 
 
 #### Postman requests
@@ -1047,42 +1048,34 @@ Used: [https://brank-edge-service-server-robindeclerck.cloud.okteto.net/genres](
 ```json
 [
   {
-    "id": "61d7429ce40c25722ecaf15f",
     "genreName": "Rock",
     "description": "Rock music is a broad genre of popular music that originated as \"rock and roll\" in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and the United Kingdom."
   },
   {
-    "id": "61d7429ce40c25722ecaf160",
     "genreName": "Heavy Metal",
     "description": "Heavy metal (or simply metal) is a genre of rock music that developed in the late 1960s and early 1970s, largely in the United Kingdom and the United States."
   },
   {
-    "id": "61d7429de40c25722ecaf161",
     "genreName": "Pop",
     "description": "Pop is a genre of popular music that originated in its modern form during the mid-1950s in the United States and the United Kingdom."
   },
   {
-    "id": "61d7429de40c25722ecaf162",
     "genreName": "Blues",
     "description": "Blues is a music genre and musical form which was originated in the Deep South of the United States around the 1860s by African-Americans from roots in African-American work songs and spirituals."
   },
   {
-    "id": "61d7429de40c25722ecaf163",
     "genreName": "Punk rock",
     "description": "Punk rock (or simply punk) is a music genre that emerged in the mid-1970s. Rooted in 1960s garage rock, punk bands rejected the perceived excesses of mainstream 1970s rock."
   },
   {
-    "id": "61d7429de40c25722ecaf164",
     "genreName": "Jazz",
     "description": "Jazz is a music genre that originated in the African-American communities of New Orleans, Louisiana, United States, in the late 19th and early 20th centuries, with its roots in blues and ragtime."
   },
   {
-    "id": "61d7429de40c25722ecaf165",
     "genreName": "Grunge",
     "description": "Grunge (sometimes referred to as the Seattle sound) is an alternative rock genre and subculture that emerged during the mid-1980s in the American Pacific Northwest state of Washington, particularly in Seattle and nearby towns."
   },
   {
-    "id": "61d7429de40c25722ecaf166",
     "genreName": "New wave",
     "description": "New wave is a broad music genre that encompasses numerous pop-oriented styles from the late 1970s and the 1980s. It was originally used as a catch-all for the music that emerged after punk rock, including punk itself, but may be viewed retrospectively as a more accessible counterpart of post-punk."
   }
@@ -1096,7 +1089,6 @@ Used: [https://brank-edge-service-server-robindeclerck.cloud.okteto.net/genres/R
 
 ```json
 {
-  "id": "61d7429ce40c25722ecaf15f",
   "genreName": "Rock",
   "description": "Rock music is a broad genre of popular music that originated as \"rock and roll\" in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and the United Kingdom."
 }
@@ -1331,11 +1323,19 @@ Status 200 OK
 [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend) |
 [Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_music-frontend)
 
+Homepage
 ![frontend](https://cdn.discordapp.com/attachments/668890794882629662/928774887521288292/frontend.PNG)
+
+Album
+![frontend](https://cdn.discordapp.com/attachments/893480492022779954/929114288411525140/unknown.png)
 
 ## Okteto
 
 All repositories run on Okteto with a K8s file found in the 'K8s' folder in every repository.\
 On deploying Okteto will automatically read the yaml files in the 'K8s' folder and run 'kubectl apply'.
-![okteto](https://cdn.discordapp.com/attachments/668890794882629662/928775961707700254/okteto-deployments.PNG)
+![okteto](https://cdn.discordapp.com/attachments/668890794882629662/929113388250976286/unknown.png)
 
+## Resultaat
+### Behaalde eisen & documentatie
+![word-doc](https://cdn.discordapp.com/attachments/668890794882629662/929114981872566272/unknown.png)
+![word-doc](https://cdn.discordapp.com/attachments/668890794882629662/929115027330445382/unknown.png)
