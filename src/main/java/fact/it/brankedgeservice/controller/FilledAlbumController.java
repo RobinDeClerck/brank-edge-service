@@ -32,7 +32,7 @@ public class FilledAlbumController {
     private String songServiceBaseUrl;
 
     @GetMapping("/albums")
-    public List<FilledAlbum> getAlbums() {
+    public List<FilledAlbum> getFilledAlbums() {
         List<FilledAlbum> returnList = new ArrayList();
 
         ResponseEntity<List<Album>> responseEntityAlbums =
@@ -44,12 +44,10 @@ public class FilledAlbumController {
         List<Album> albums = responseEntityAlbums.getBody();
 
         for (Album album : albums) {
-            ResponseEntity<List<Song>> responseEntitySongs =
-                    restTemplate.exchange("http://" + songServiceBaseUrl + "/songs/album/{MAID}",
-                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {
-                            }, album.getMAID()
-                    );
-            List<Song> songs = responseEntitySongs.getBody();
+            ResponseEntity<Song[]> response =
+                    restTemplate.getForEntity("http://" + songServiceBaseUrl + "/songs/album/{MAID}",
+                            Song[].class, album.getMAID());
+            List<Song> songs = List.of(response.getBody());
 
             Artist artist = restTemplate.getForObject("http://" + artistServiceBaseUrl + "/artists/{MBID}",
                     Artist.class, album.getMBID());
