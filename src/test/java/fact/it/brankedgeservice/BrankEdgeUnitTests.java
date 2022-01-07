@@ -310,6 +310,28 @@ public class BrankEdgeUnitTests {
     }
 
     @Test
+    public void whenGetArtistByMBID_thenReturnArtistJson() throws Exception {
+        // GET all artist 1 by mbid
+        mockServer.expect(ExpectedCount.once(),
+                        requestTo(new URI("http://" + artistServiceBaseUrl + "/artists/" + artist1.getMBID())))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(artist1))
+                );
+
+        mockMvc.perform(get("/artists/{mbid}", artist1.getMBID()))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("Radiohead")))
+                .andExpect(jsonPath("$.type", is("Rock band")))
+                .andExpect(jsonPath("$.originCountry", is("United Kingdom")))
+                .andExpect(jsonPath("$.members", is(Arrays.asList("Thom Yorke", "Jonny Greenwood", "Ed O'Brien", "Colin Greenwood", "Philip Selway"))))
+                .andExpect(jsonPath("$.bannerImage", is("https://i.scdn.co/image/ab676186000010161802a4cbec82e078cc15cbb0")))
+                .andExpect(jsonPath("$.mbid", is("a74b1b7f-71a5-4011-9441-d0b5e4122711")));
+    }
+
+    @Test
     public void whenGetAllGenres_thenReturnGenreJson() throws Exception {
 
         // GET all genres
