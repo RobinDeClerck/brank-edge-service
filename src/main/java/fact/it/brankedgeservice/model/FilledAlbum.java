@@ -4,6 +4,7 @@ import java.util.List;
 
 public class FilledAlbum {
     private String MAID;
+    private String MBID;
     private String name;
     private String image;
     private String genre;
@@ -15,6 +16,7 @@ public class FilledAlbum {
 
     public FilledAlbum(Album album, Artist artist, List<Song> songs) {
         setMAID(album.getMAID());
+        setMBID(album.getMBID());
         setName(album.getName());
         setGenre(album.getGenre());
         setImage(album.getImage());
@@ -30,6 +32,14 @@ public class FilledAlbum {
 
     public void setMAID(String MAID) {
         this.MAID = MAID;
+    }
+
+    public String getMBID() {
+        return MBID;
+    }
+
+    public void setMBID(String MBID) {
+        this.MBID = MBID;
     }
 
     public String getName() {
