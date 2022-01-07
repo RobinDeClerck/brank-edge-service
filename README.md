@@ -14,28 +14,34 @@ Belangrijk:
   - [Thema](#thema)
 - [Services](#services)
   - [BRANK-EDGE-SERVICE](#brank-edge-service)
-    - [Repository-link](https://github.com/RobinDeClerck/brank-edge-service)
-    - [Okteto-link](https://brank-edge-service-server-robindeclerck.cloud.okteto.net/)
+    - [Brank-edge-service repository](https://github.com/RobinDeClerck/brank-edge-service) |
+      [Okteto-link](https://brank-edge-service-server-robindeclerck.cloud.okteto.net/) |
+      [Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_brank-edge-service)
   - [ARTIST-SERVICE](#brank-edge-service)
     - [Artist-service repository](https://github.com/RobinDeClerck/artist-service) |
       [Okteto](https://artist-service-server-robindeclerck.cloud.okteto.net) |
-      [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/artist-service)
+      [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/artist-service) |
+      [Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_artist-service)
   - [ALBUM-SERVICE](#album-service)
     - [Album-service repository](https://github.com/RobinDeClerck/album-service) |
       [Okteto](https://album-service-server-robindeclerck.cloud.okteto.net) |
-      [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/album-service)
+      [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/album-service) |
+      [Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_album-service)
   - [SONG-SERVICE](#song-service)
     - [Song-service repository](https://github.com/anthonydecap/service-song) |
       [Okteto](https://song-service-server-robindeclerck.cloud.okteto.net/) |
-      [Dockerhub](https://hub.docker.com/r/realnigel/song-service)
+      [Dockerhub](https://hub.docker.com/r/realnigel/song-service) |
+      [Sonarcloud](https://sonarcloud.io/project/overview?id=anthonydecap_service-song)
   - [GENRE-SERVICE](#genre-service)
     - [Genre-service repository](https://github.com/JoNaulaerts/genre-service) |
       [Okteto](https://genre-service-server-robindeclerck.cloud.okteto.net/) |
-      [Dockerhub](https://hub.docker.com/r/jonaulaerts/genre-service)
+      [Dockerhub](https://hub.docker.com/r/jonaulaerts/genre-service) |
+      [Sonarcloud](https://sonarcloud.io/project/overview?id=JoNaulaerts_genre-service)
   - [FRONTEND](#frontend)
     - [Frontend repository](https://github.com/RobinDeClerck/music-frontend) |
       [Okteto FRONTEND LINK](https://frontend-server-robindeclerck.cloud.okteto.net/) |
-      [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend)
+      [Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend) |
+      [Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_music-frontend)
 - [Okteto](#okteto)
 
 
@@ -61,9 +67,10 @@ Al deze services werken samen om 1 grote applicatie te creëren.
 
 ### Brank-Edge-service
 
-[Brank-Edge-service repository](https://github.com/RobinDeClerck/brank-edge-service) |
+[Brank-edge-service repository](https://github.com/RobinDeClerck/brank-edge-service) |
 [Okteto](https://brank-edge-service-server-robindeclerck.cloud.okteto.net/) |
-[Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/brank-edge-service)
+[Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/brank-edge-service) |
+[Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_brank-edge-service)
 
 #### Schema
 
@@ -426,31 +433,36 @@ Used: [https://brank-edge-service-server-robindeclerck.cloud.okteto.net/genres/R
 
 [Artist-service repository](https://github.com/RobinDeClerck/artist-service) |
 [Okteto](https://artist-service-server-robindeclerck.cloud.okteto.net) (testing only!) |
-[Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/artist-service)
+[Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/artist-service) |
+[Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_artist-service)
 
 ### Album-service
 
 [Album-service repository](https://github.com/RobinDeClerck/album-service) |
 [Okteto](https://album-service-server-robindeclerck.cloud.okteto.net) (testing only!) |
-[Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/album-service)
+[Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/album-service) |
+[Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_album-service)
 
 ### Song-service
 
 [Song-service repository](https://github.com/anthonydecap/service-song) |
 [Okteto](https://song-service-server-robindeclerck.cloud.okteto.net/) (testing only!) |
-[Dockerhub](https://hub.docker.com/r/realnigel/song-service)
+[Dockerhub](https://hub.docker.com/r/realnigel/song-service) |
+[Sonarcloud](https://sonarcloud.io/project/overview?id=anthonydecap_service-song)
 
 ### Genre-service
 
 [Genre-service repository](https://github.com/JoNaulaerts/genre-service) |
 [Okteto](https://genre-service-server-robindeclerck.cloud.okteto.net/) (testing only!) |
-[Dockerhub](https://hub.docker.com/r/jonaulaerts/genre-service)
+[Dockerhub](https://hub.docker.com/r/jonaulaerts/genre-service) |
+[Sonarcloud](https://sonarcloud.io/project/overview?id=JoNaulaerts_genre-service)
 
 ### Frontend
 
 [Frontend repository](https://github.com/RobinDeClerck/music-frontend) |
 [Okteto FRONTEND LINK](https://frontend-server-robindeclerck.cloud.okteto.net/) |
-[Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend)
+[Dockerhub](https://hub.docker.com/repository/docker/robindeclerck/music-frontend) |
+[Sonarcloud](https://sonarcloud.io/project/overview?id=RobinDeClerck_music-frontend)
 
 ![frontend](https://cdn.discordapp.com/attachments/668890794882629662/928774887521288292/frontend.PNG)
 
