@@ -113,6 +113,25 @@ public class FilledAlbumController {
     }
 //---------------------------------------------------------------------------------------------------
 
+//    @GetMapping("/songs")
+//    public List<Song> getSongs(){
+//        ResponseEntity<List<Song>> responseEntityGenres =
+//                restTemplate.exchange("http://" + songServiceBaseUrl + "/genres",
+//                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Song>>() {
+//                        }
+//                );
+//        List<Song> songs = responseEntityGenres.getBody();
+//
+//        return songs;
+//    }
+
+
+    @GetMapping("/songs/{ISRC}")
+    public Song getSongByISRC(@PathVariable String ISRC) {
+        Song song = restTemplate.getForObject("http://" + songServiceBaseUrl + "/songs/{ISRC}", Song.class, ISRC);
+        return song;
+    }
+
     @PostMapping("/songs")
     public Song addSong(@RequestBody Song songInput) {
 
@@ -121,6 +140,15 @@ public class FilledAlbumController {
 
         return song;
     }
+
+//    @PostMapping("/songs")
+//    public Song addSong(@RequestParam String ISRC, @RequestParam String MBID, @RequestParam String MAID, @RequestParam String Genre, @RequestParam String Title, @RequestParam Integer Length, @RequestParam String Url) {
+//
+//        Song song = restTemplate.postForObject("http://" + songServiceBaseUrl + "/songs",
+//                new Song(ISRC, MBID, MAID, Genre, Title, Length, Url), Song.class);
+//
+//        return song;
+//    }
 
     @PutMapping("/songs")
     public Song updateSong(@RequestBody Song updateSong) {
